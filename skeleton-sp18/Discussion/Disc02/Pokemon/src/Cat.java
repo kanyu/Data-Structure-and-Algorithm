@@ -20,13 +20,13 @@ public class Cat {
     }
 
     public static void main(String[] args){
-        Cat a = new Cat("Cream", "Meow!"); // create new cat name "Cream" who make noise "Meow!" and assign to a
-        Cat b = new Cat("Tubbs", "Nyan!"); // create new cat name "Tubbs" who make noise "Nyan!" and assign to b
-        a.play(); // print "Meow! I'm Cream the cat!"
+        Cat a = new Cat("Cream", "Meow!"); // create new cat name "Cream" who make noise "Meow!" and assign to a, static noise = "Meow!"
+        Cat b = new Cat("Tubbs", "Nyan!"); // create new cat name "Tubbs" who make noise "Nyan!" and assign to b, static noise = "Nyan!"
+        a.play(); // print "Nyan! I'm Cream the cat!"
         b.play(); // print "Nyan! I'm Tubb the cat!"
-        Cat.anger(); // Meow!, Nyan! -> MEOW!, NYAN!
-        a.calm(); // MEOW! -> Meow!
-        a.play(); // print "Meow! I'm Cream the cat!"
-        b.play(); // print "NYAN! I'm Tubb the cat!"
+        Cat.anger(); // Nyan! -> NYAN!
+        a.calm(); // NYAN! -> nyan!
+        a.play(); // print "nyan! I'm Cream the cat!"
+        b.play(); // print "nyan! I'm Tubb the cat!"
     }
 }
