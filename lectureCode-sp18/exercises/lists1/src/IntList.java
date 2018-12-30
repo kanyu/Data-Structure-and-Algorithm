@@ -27,7 +27,7 @@ public class IntList {
     return size;
   }
 
-	/** Returns the ith value in this list.*/
+	/** Returns the ith value in this list - recursive.*/
 	public int get(int i) {
 		if(i == 0){
       return first;
