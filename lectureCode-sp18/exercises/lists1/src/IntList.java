@@ -30,9 +30,9 @@ public class IntList {
 	/** Returns the ith value in this list.*/
 	public int get(int i) {
 		if(i == 0){
-      return this.first;
+      return first;
     }else{
-      return this.rest.get(i - 1);
+      return rest.get(i - 1);
     }
   }
 	// return number at index i iterative method
