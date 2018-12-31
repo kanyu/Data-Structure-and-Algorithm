@@ -1,3 +1,5 @@
+//import jdk.nashorn.internal.ir.WhileNode;
+
 import java.util.Formatter;
 
 /**
@@ -77,12 +79,27 @@ public class IntList {
 
     /**
      * Returns a list consisting of the elements of A followed by the
-     * *  elements of B.  May modify items of A. Don't use 'new'.
+     **  elements of B.  May modify items of A. Don't use 'new'.
      */
 
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        if(A.rest == null){
+            A.rest = B;
+        }else{
+            dcatenate(A.rest, B);
+        }
+        return A;
+    }
+
+    public static IntList dcatenateIter(IntList A, IntList B) {
+        //TODO:  fill in method
+        IntList L = A;
+        while(L.rest != null){
+            L = L.rest;
+        }
+        L.rest = B;
+        return A;
     }
 
     /**
@@ -91,7 +108,25 @@ public class IntList {
      */
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        if(A.rest == null){
+            return new IntList(A.first, B);
+        }else{
+            return new IntList(A.first, catenate(A.rest, B));
+        }
+    }
+
+    public static IntList catenateIter(IntList A, IntList B) {
+        //TODO:  fill in method
+        IntList rturn = new IntList(A.first, B);
+        IntList helper = rturn;
+        IntList L = A.rest;
+
+        while(L != null){
+            helper.rest = new IntList(L.first, helper.rest);
+            helper = helper.rest;
+            L = L.rest;
+        }
+        return rturn;
     }
 
 
