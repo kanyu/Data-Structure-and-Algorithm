@@ -11,42 +11,42 @@ public class SLList{
     }
   }
 
-  private IntNode first;
+/** The sentinal (dummy humpty node) always be there to help the SLList more consistent
+  * The first item (if it exists) is at sentinel.next */
+  private IntNode sentinal;
   private int counter;
 
   public SLList(int x){
     counter = 1;
-    first = new IntNode(x, null);
+    sentinal = new IntNode(69, null);
+    sentinal.next = new IntNode(x, null);
   }
   public SLList(){
     counter = 0;
-    first = null;
+    sentinal = new IntNode(69, null);
   }
 // Return first item
   public int getFirst(){
-    return first.item;
+    return sentinal.next.item;
   }
 
 // Add item to become the first
   public void addFirst(int n){
-    first = new IntNode(n, first);
+     sentinal.next = new IntNode(n, sentinal.next);
     counter += 1;
   }
 
 // Add item to the last of the list.
   // Iterative method
   public void addLast(int n){
-    counter += 1;
-    if(first == null){
-      first = new IntNode(n, first);
-    }else{
-      IntNode Tmp = first;
-      while(Tmp.next != null){
-        Tmp = Tmp.next;
-      }
-      Tmp.next = new IntNode(n, null);
+  counter += 1;
+    IntNode Tmp =  sentinal.next;
+    while(Tmp.next != null){
+      Tmp = Tmp.next;
     }
+    Tmp.next = new IntNode(n, null);
   }
+
   // Recursive methor
   private void addLastHelper(IntNode f, int n){
     if(f.next == null){
@@ -58,7 +58,7 @@ public class SLList{
 
   public void addLastRecursive(int n){
     counter += 1;
-    addLastHelper(first, n);
+    addLastHelper(sentinal.next, n);
   }
 // Size of SLList
   private static int sizeHelper(IntNode f){
@@ -69,7 +69,7 @@ public class SLList{
     }
   }
   public int size(){
-    return sizeHelper(first);
+    return sizeHelper(sentinal.next);
   }
 
   public int fastSize(){
