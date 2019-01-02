@@ -8,37 +8,52 @@ public class IntList {
 	}
 
 	/** Return the size of the list using... recursion! */
-	public int size() {
-		if (rest == null) {
-			return 1;
-		}
-		return 1 + this.rest.size();
-	}
+	public int size(){
+    if(this.rest == null){
+      return 1;
+    }else{
+      return 1 + this.rest.size();
+    }
+  }
 
 	/** Return the size of the list using no recursion! */
 	public int iterativeSize() {
-		IntList p = this;
-		int totalSize = 0;
-		while (p != null) {
-			totalSize += 1;
-			p = p.rest;
-		}
-		return totalSize;
-	}
+		IntList L = this;
+    int size = 1;
+    while(L.rest != null){
+      size += 1;
+      L = L.rest;
+    }
+    return size;
+  }
 
-	/** Returns the ith item of this IntList. */
+	/** Returns the ith value in this list.*/
 	public int get(int i) {
-		if (i == 0) {
-			return first;
-		}
-		return rest.get(i - 1);
-	}
-
+		if(i == 0){
+      return this.first;
+    }else{
+      return this.rest.get(i - 1);
+    }
+  }
+	// return number at index i iterative method
+  public int getIter(int i){
+    int index = 0;
+    IntList L = this;
+    if(index == i){
+      return L.first;
+    }else{
+      while ((index < i) && (L != null)){
+        index += 1;
+        L = L.rest;
+      }
+      return L.first;
+    }
+  }
 	public static void main(String[] args) {
 		IntList L = new IntList(15, null);
 		L = new IntList(10, L);
 		L = new IntList(5, L);
 
-		System.out.println(L.get(100));
+		System.out.println(L.iterativeSize());
 	}
-} 
+}

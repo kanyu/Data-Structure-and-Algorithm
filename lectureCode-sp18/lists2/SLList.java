@@ -1,72 +1,88 @@
- /** An SLList is a list of integers, which hides the terrible truth
-   * of the nakedness within. */
-public class SLList {	
-	private static class IntNode {
-		public int item;
-		public IntNode next;
+/** An SLList is a list of integers, which hides the terrible truth */
+public class SLList{
 
-		public IntNode(int i, IntNode n) {
-			item = i;
-			next = n;
-			System.out.println(size);
-		}
-	} 
+  public static class IntNode{
+    public int item;
+    public IntNode next;
 
-	/* The first item (if it exists) is at sentinel.next. */
-	private IntNode sentinel;
-	private int size;
+    public IntNode(int i, IntNode n){
+      item = i;
+      next = n;
+    }
+  }
 
-	private static void lectureQuestion() {
-		SLList L = new SLList();
-		IntNode n = IntNode(5, null);
-	}
+  private IntNode first;
+  private int counter;
 
-	/** Creates an empty SLList. */
-	public SLList() {
-		sentinel = new IntNode(63, null);
-		size = 0;
-	}
+  public SLList(int x){
+    counter = 1;
+    first = new IntNode(x, null);
+  }
+  public SLList(){
+    counter = 0;
+    first = null;
+  }
+// Return first item
+  public int getFirst(){
+    return first.item;
+  }
 
-	public SLList(int x) {
-		sentinel = new IntNode(63, null);
-		sentinel.next = new IntNode(x, null);
-		size = 1;
-	}
+// Add item to become the first
+  public void addFirst(int n){
+    first = new IntNode(n, first);
+    counter += 1;
+  }
 
- 	/** Adds x to the front of the list. */
- 	public void addFirst(int x) {
- 		sentinel.next = new IntNode(x, sentinel.next);
- 		size = size + 1;
- 	}
+// Add item to the last of the list.
+  // Iterative method
+  public void addLast(int n){
+    counter += 1;
+    if(first == null){
+      first = new IntNode(n, first);
+    }else{
+      IntNode Tmp = first;
+      while(Tmp.next != null){
+        Tmp = Tmp.next;
+      }
+      Tmp.next = new IntNode(n, null);
+    }
+  }
+  // Recursive methor
+  private void addLastHelper(IntNode f, int n){
+    if(f.next == null){
+      f.next = new IntNode(n, null);
+    }else{
+      addLastHelper(f.next, n);
+    }
+  }
 
- 	/** Returns the first item in the list. */
- 	public int getFirst() {
- 		return sentinel.next.item;
- 	}
+  public void addLastRecursive(int n){
+    counter += 1;
+    addLastHelper(first, n);
+  }
+// Size of SLList
+  private static int sizeHelper(IntNode f){
+    if(f.next == null){
+      return 1;
+    }else{
+      return 1 + sizeHelper(f.next);
+    }
+  }
+  public int size(){
+    return sizeHelper(first);
+  }
 
- 	/** Adds x to the end of the list. */
- 	public void addLast(int x) {
- 		size = size + 1; 		
-
- 		IntNode p = sentinel;
-
- 		/* Advance p to the end of the list. */
- 		while (p.next != null) {
- 			p = p.next;
- 		}
-
- 		p.next = new IntNode(x, null);
- 	}
- 	
- 	/** Returns the size of the list. */
- 	public int size() {
- 		return size;
- 	}
-
-	public static void main(String[] args) {
- 		/* Creates a list of one integer, namely 10 */
- 		SLList L = new SLList();
- 		L.addLast(20);
- 		System.out.println(L.size());
- 	}
+  public int fastSize(){
+    return counter;
+  }
+  public static void main(String[] args){
+    // Creates a list of one integer, namely 10
+    SLList L = new SLList(15);
+    L.addFirst(10);
+    L.addFirst(5);
+    L.addLast(20);
+    L.addLastRecursive(25);
+    System.out.println(L.size());
+    System.out.println(L.fastSize());
+  }
 }

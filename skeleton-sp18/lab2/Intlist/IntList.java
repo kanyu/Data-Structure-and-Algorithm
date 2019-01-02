@@ -129,21 +129,6 @@ public class IntList {
         return rturn;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * DO NOT MODIFY ANYTHING BELOW THIS LINE! Many of the concepts below here
      * will be introduced later in the course or feature some form of advanced
@@ -266,4 +251,3 @@ public class IntList {
         return out.toString();
     }
 }
-
