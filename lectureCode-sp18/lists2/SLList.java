@@ -16,14 +16,27 @@ public class SLList{
   private IntNode sentinal;
   private int counter;
 
+// SLList Constructor
   public SLList(int x){
     counter = 1;
-    sentinal = new IntNode(69, null);
+    sentinal = new IntNode(42, null);
     sentinal.next = new IntNode(x, null);
   }
+// Empty SLList Constructor
   public SLList(){
     counter = 0;
-    sentinal = new IntNode(69, null);
+    sentinal = new IntNode(42, null);
+  }
+
+// SLList from array Constructor
+  public SLList(int[] s){
+    counter = 0;
+    int i = s.length - 1;
+    sentinal = new IntNode(42, null);
+    while(i >= 0){
+      this.addFirst(s[i]);
+      i -= 1;
+    }
   }
 // Return first item
   public int getFirst(){
@@ -40,7 +53,7 @@ public class SLList{
   // Iterative method
   public void addLast(int n){
   counter += 1;
-    IntNode Tmp =  sentinal.next;
+    IntNode Tmp =  sentinal;
     while(Tmp.next != null){
       Tmp = Tmp.next;
     }
@@ -75,14 +88,26 @@ public class SLList{
   public int fastSize(){
     return counter;
   }
+
+// delete first element
+  public void deleteFirst(){
+    sentinal.next = sentinal.next.next;
+    counter -= 1;
+  }
+
   public static void main(String[] args){
     // Creates a list of one integer, namely 10
-    SLList L = new SLList(15);
-    L.addFirst(10);
-    L.addFirst(5);
-    L.addLast(20);
-    L.addLastRecursive(25);
+    int[] intArray = new int[]{1, 2, 3, 4, 5};
+    SLList L = new SLList(intArray);
+    // L.addFirst(10);
+    // L.addFirst(5);
+    // L.addLast(20);
+    // L.addLastRecursive(25);
     System.out.println(L.size());
     System.out.println(L.fastSize());
+    System.out.println(L.getFirst());
+    // L.deleteFirst();
+    // System.out.println(L.getFirst());
+    // System.out.println(L.fastSize());
   }
 }
