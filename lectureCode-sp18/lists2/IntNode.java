@@ -1,5 +1,5 @@
 public class IntNode{
-  public Int item;
+  public int item;
   public IntNode next;
 
   public IntNode(int i, IntNode n){

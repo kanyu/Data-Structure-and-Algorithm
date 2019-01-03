@@ -21,7 +21,39 @@ public class IntList {
 			rest = copyL;
 	}
 	// conclusion: verbose and inefficien: take O(n) compare to O(1) time complex
+	// Midterm 1 Q5:
+	/** We want to add a method to IntList so that if 2 numbers in a row are thesame,
+	we add them together and make one large node. For example:
+	1 ⇒ 1 ⇒ 2 ⇒ 3 becomes 2 ⇒ 2 ⇒ 3 which becomes 4 ⇒ 3.For this problem,
+	you will not have access to any add, size, or remove method.
+	*/
+	public void addAdjacent(){
+		IntList p = this;
+		if(p.rest == null){
+			System.out.println("Nothing to do");
+		}
+		IntList s = p;
+		while(s.rest != null){
+			if(s.first == s.rest.first){
+				s.first = s.first + s.rest.first;
+				s.rest = s.rest.rest;
+				s.addAdjacent();
+			}else if(s.first != s.rest.first){
+				s = s.rest;
+				s.addAdjacent();
+			}
+		}
+	}
 
+	public IntList addSquare(int n){
+		if (rest == null){
+			rest = new IntList(first*first, new IntList(n, null));
+			return this;
+		}else{
+			rest = new IntList(first*first, rest.addSquare(n));
+			return this;
+		}
+	}
 	/** Return the size of the list using... recursion! */
 	public int size() {
 		if (rest == null) {
@@ -50,10 +82,13 @@ public class IntList {
 	}
 
 	public static void main(String[] args) {
-		IntList L = new IntList(15, null);
-		L = new IntList(10, L);
-		L = new IntList(5, L);
-		L.addFirst(99);
-		System.out.printf("%s, %s, %s, %s", L.get(0), L.get(1), L.get(2), L.get(3));
+		IntList L = new IntList(2, null);
+		L = new IntList(1, L);
+//		L = new IntList(1, L);
+//		L = new IntList(1, L);
+		L.addSquare(5);
+		L.addSquare(7);
+		System.out.println(L.size());
+//		System.out.printf("%s, %s\n", L.get(0), L.get(1));
 	}
 }
