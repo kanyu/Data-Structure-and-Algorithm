@@ -41,20 +41,25 @@ public class DLList {
     }
 
     public void removeFirst(){
-
+        sentinal.next = sentinal.next.next;
+        sentinal.next.prev = sentinal;
+        size -= 1;
     }
 
     public void addLast(int n){
         if(sentinal.next != null) {
             last.next = new IntNode(last, n, null);
             last = last.next;
+            size += 1;
         }else{
             addFirst(n);
         }
-        size += 1;
     }
 
     public void removeLast(){
+        last = last.prev;
+        last.next = null;
+        size -= 1;
 
     }
 
@@ -66,6 +71,8 @@ public class DLList {
         D.addLast(10);
         D.addFirst(7);
         D.addFirst(6);
+        D.removeFirst();
+        D.removeLast();
 
     }
 }
