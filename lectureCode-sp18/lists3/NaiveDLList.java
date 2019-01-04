@@ -1,4 +1,4 @@
-public class DLList {
+public class NaiveDLList {
     public static class IntNode{
         public int item;
         public IntNode next;
@@ -15,14 +15,14 @@ public class DLList {
     public IntNode last;
 //    public IntNode prev;
 
-    public DLList(int n){
+    public NaiveDLList(int n){
         sentinal = new IntNode(null, 42, null);
         sentinal.next = new IntNode(sentinal, 9, null);
         last = sentinal.next;
         size = 1;
     }
 
-    public DLList(){
+    public NaiveDLList(){
         sentinal = new IntNode(null, 42, null);
         last = null;
         size = 0;
@@ -64,8 +64,8 @@ public class DLList {
     }
 
     public static void main(String[] args){
-//        DLList D = new DLList(9);
-        DLList D = new DLList();
+//        NaiveDLList D = new NaiveDLList(9);
+        NaiveDLList D = new NaiveDLList();
         D.addLast(9);
         D.addFirst(8);
         D.addLast(10);
