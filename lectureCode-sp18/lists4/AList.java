@@ -2,49 +2,39 @@
  *  @author Josh Hug
  */
 
-//         0 1  2 3 4 5 6 7
-// items: [6 9 -1 2 0 0 0 0 ...]
-// size: 5
-
-/* Invariants:
- addLast: The next item we want to add, will go into position size
- getLast: The item we want to return is in position size - 1
- size: The number of items in the list should be size.
-*/
-
-public class AList<Item> {
-    private Item[] items;
-    private int size;
-
+public class AList {
     /** Creates an empty list. */
-    public AList() {
-        items = (Item[]) new Object[100];
-        size = 0;
-    }
+    private int[] items;
+    private int size;
+    private int rFactor = 2;
 
-    /** Resizes the underlying array to the target capacity. */
-    private void resize(int capacity) {
-        Item[] a = (Item[]) new Object[capacity];
-        System.arraycopy(items, 0, a, 0, size);
-        items = a;
+    public AList() {
+        size = 0;
+        items = new int[100];
+
     }
 
     /** Inserts X into the back of the list. */
-    public void addLast(Item x) {
-        if (size == items.length) {
-            resize(size + 1);
-        }
+    private void resize(int capaciy){
+        int[] tempA = new int[capaciy];
+        System.arraycopy(items, 0, tempA, 0, size);
+        items = tempA;
+    }
 
-        items[size] = x;
-        size = size + 1;
+    public void addLast(int x) {
+        if(size == items.length) {
+            resize(size * rFactor);
+        }
+        size += 1;
+        items[size-1] = x;
     }
 
     /** Returns the item from the back of the list. */
-    public Item getLast() {
-        return items[size - 1];
+    public int getLast() {
+        return items[size-1];
     }
     /** Gets the ith item in the list (0 is the front). */
-    public Item get(int i) {
+    public int get(int i) {
         return items[i];
     }
 
@@ -54,11 +44,10 @@ public class AList<Item> {
     }
 
     /** Deletes item from back of the list and
-      * returns deleted item. */
-    public Item removeLast() {
-        Item x = getLast();
-        items[size - 1] = null;
-        size = size - 1;
+     * returns deleted item. */
+    public int removeLast() {
+        int x = getLast();
+        size -= 1;
         return x;
     }
 } 

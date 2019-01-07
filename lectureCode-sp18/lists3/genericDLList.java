@@ -88,5 +88,9 @@ public class genericDLList<dataType> {
         D.getFirst();
         D.getLast();
 
+        genericDLList<String> S = new genericDLList<>();
+        S.addLast("Wolrd!!!");
+        S.addFirst("Hello ");
+
     }
 }
