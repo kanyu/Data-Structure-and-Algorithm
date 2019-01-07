@@ -78,7 +78,7 @@ public class LinkedListDeque<T> {
         size += 1;
     }
 
-    public  void removeFirst(){
+    public void removeFirst(){
         if(!isEmpty()){
             tNode temp = cSentinel.next.next;
             // remove any reference of removing tNode
