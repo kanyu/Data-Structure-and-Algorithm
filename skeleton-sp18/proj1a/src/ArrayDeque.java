@@ -2,10 +2,14 @@ public class ArrayDeque {
     private int[] items;
     private int size;
     private double uFactor = 0.25;
+    private int nLast;
+    private int nStart;
 
-    public ArrayDeque(int n){
+    public ArrayDeque(){
         size = 0;
         items = new int[8];
+        nStart = items.length / 2;
+        nLast = nStart;
     }
 
     public boolean isEmpty(){
@@ -19,14 +23,23 @@ public class ArrayDeque {
         return  size;
     }
 
-    public int get(int i){
-        return items[i];
+    public int get(int userIndex){
+        if(userIndex > size - 1){
+            System.out.println("Out of index!!!");
+            return 0;
+        }
+        int realIndex = userIndex + nStart;
+        if(realIndex > items.length - 1) {
+            realIndex = realIndex % items.length;
+        }
+        return items[realIndex];
     }
 
     public void printDeque(){
         int i = 0;
         while (i < size){
-            System.out.printf("%s ", items[i]);
+            System.out.printf("%s ", get(i));
+            i++;
         }
     }
 
@@ -39,7 +52,17 @@ public class ArrayDeque {
     }
 
     public void addLast(int x){
-
+        int proposeLast = nLast + 1;
+        if(proposeLast > items.length - 1){
+            proposeLast = proposeLast % items.length;
+        }
+        if(proposeLast != nStart){
+            items[nLast] = x;
+            nLast = proposeLast;
+        }else{
+            //resize up
+        }
+        size += 1;
     }
 
     public void removeLast(){
@@ -48,14 +71,21 @@ public class ArrayDeque {
 
     public static void main(String[] args){
         ArrayDeque D = new ArrayDeque();
+        D.addLast(4);
+        D.addLast(5);
+        D.addLast(6);
+        D.addLast(7);
+        D.addLast(8);
         D.addLast(9);
-        D.addFirst(8);
-        D.addLast(10);
-        D.addFirst(7);
-        D.addFirst(6);
-        D.removeFirst();
-        D.removeLast();
-        System.out.println(D.get(0));
+
+        System.out.println(D.get(7));
+        System.out.println(D.get(1));
+        System.out.println(D.get(2));
+        System.out.println(D.get(3));
+        System.out.println(D.get(4));
+        System.out.println(D.get(5));
+        System.out.println(D.get(6));
+        System.out.println(D.get(7));
         System.out.println(D.size());
         D.printDeque();
     }

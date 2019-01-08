@@ -29,6 +29,9 @@ public class SLList {
         first = new IntNode(x, first);
         size += 1;
     }
+    public int getFirst(){
+        return first.item;
+    }
 
     public void insert(int x, int i){
         if(i == 0){
@@ -69,16 +72,31 @@ public class SLList {
 //            i += 1;
 //        }
 //    }
+    // this reverse time complex is O(n^3 + n), memory space is 2n
     public void reverse(){
         int i = 0;
         while(i <= size){
-            insert(get(size-1).item, i);
+            insert(get(size-1).item, i); //insert the
             size -= 1;
             i += 1;
         }
         IntNode temp = get(size-1);
         temp.next = null;
     }
+
+    public void reverse2(){
+        IntNode frontOfReversed = null;
+        IntNode nextNodeToAdd = first;
+        IntNode remainderOfOriginal;
+        while (nextNodeToAdd != null){
+            remainderOfOriginal = nextNodeToAdd.next;
+            nextNodeToAdd.next = frontOfReversed;
+            frontOfReversed = nextNodeToAdd;
+            nextNodeToAdd = remainderOfOriginal;
+        }
+        first = frontOfReversed;
+    }
+
     private void reverseRecurHelper(int i){
 
     }
@@ -99,7 +117,7 @@ public class SLList {
         S.insert(4, 0);
         S.insert(9, 4);
         S.print();
-        S.reverse();
+        S.reverse2();
         S.print();
     }
 }
