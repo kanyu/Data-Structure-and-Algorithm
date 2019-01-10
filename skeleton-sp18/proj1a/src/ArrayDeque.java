@@ -1,5 +1,5 @@
-public class ArrayDeque {
-    private int[] items;
+public class ArrayDeque<T> {
+    private T[] items;
     private int size;
     private double uFactor = 0.25;
     private int rFactor = 2;
@@ -8,13 +8,13 @@ public class ArrayDeque {
 
     public ArrayDeque(){
         size = 0;
-        items = new int[8];
+        items = (T[]) new Object[8];
         nStart = 0;
         nLast = 1;
     }
 
-    public ArrayDeque(int[] arr){
-        items = new int[arr.length + 2];
+    public ArrayDeque(T[] arr){
+        items = (T[]) new Object[arr.length + 2];
         System.arraycopy(arr, 0,items,1, arr.length);
         size = arr.length;
         nStart = 0;
@@ -33,7 +33,7 @@ public class ArrayDeque {
         return size;
     }
     private void copyToNewArray(int length) {
-        int[] newArray = new int[length];
+        T[] newArray = (T[]) new Object[length];
         if (nStart < nLast) {
             System.arraycopy(items, nStart + 1, newArray, 1, size);
         }else if(nStart == items.length - 1){
@@ -67,12 +67,12 @@ public class ArrayDeque {
         return realIndex;
     }
 
-    public int get(int userIndex){
+    public T get(int userIndex){
         return items[getRealIndex(userIndex)];
     }
 
     //private method to set value to array at [ith]
-    private void set(int userIndex, int n){
+    private void set(int userIndex, T n){
         items[getRealIndex(userIndex)] = n;
     }
 
@@ -87,7 +87,7 @@ public class ArrayDeque {
         System.out.println();
     }
 
-    public void addFirst(int x){
+    public void addFirst(T x){
         resize();
         int propose_nStart = nStart - 1;
         if(propose_nStart < 0){
@@ -111,14 +111,14 @@ public class ArrayDeque {
                 // set first value to zero
 //            set(0, 0);
                 // it's safe to just use
-                items[propose_nStart] = 0;
+                items[propose_nStart] = null;
                 nStart = propose_nStart; // change nStart position
                 size -= 1;
             }
         }
     }
 
-    public void addLast(int x){
+    public void addLast(T x){
         if(isEmpty()){
             addFirst(x);
         }else{
@@ -144,7 +144,7 @@ public class ArrayDeque {
                 propose_nLast = items.length - 1;
             }
             if (propose_nLast != nStart) {
-                items[propose_nLast] = 0;
+                items[propose_nLast] = null;
                 nLast = propose_nLast;
                 size -= 1;
             }
@@ -152,11 +152,12 @@ public class ArrayDeque {
     }
 
     public static void grow_nStart_lessThan_nLast(){
-        int[] test = {1, 2, 3, 4, 5, 6, 7, 8};
-        ArrayDeque D = new ArrayDeque(test);
+        Integer[] test = {1, 2, 3, 4, 5, 6, 7, 8};
+        ArrayDeque<Integer> D = new ArrayDeque<>(test);
         test = null;
+//        ArrayDeque<Integer> D = new ArrayDeque<>();
         for(int i = 1; i < 10; i++){
-            D.addLast(8+i);
+            D.addLast(i);
             D.addFirst(-i);
         }
         while (D.size() > 1) {
