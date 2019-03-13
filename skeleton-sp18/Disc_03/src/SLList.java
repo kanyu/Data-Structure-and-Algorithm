@@ -84,18 +84,23 @@ public class SLList {
         temp.next = null;
     }
 
-    public void reverse2(){
-        IntNode frontOfReversed = null;
-        IntNode nextNodeToAdd = first;
-        IntNode remainderOfOriginal;
-        while (nextNodeToAdd != null){
-            remainderOfOriginal = nextNodeToAdd.next;
-            nextNodeToAdd.next = frontOfReversed;
-            frontOfReversed = nextNodeToAdd;
-            nextNodeToAdd = remainderOfOriginal;
+    public void reverseIter(){
+        IntNode previous = null;
+        IntNode Front = first;
+        IntNode swapper = Front.next;
+        IntNode remainder = swapper.next;
+        Front.next = previous;
+        previous = Front;
+        while(swapper != null){
+            remainder = swapper.next;
+            swapper.next = previous;
+            previous = swapper;
+            swapper = remainder;
+
         }
-        first = frontOfReversed;
+        first = previous;
     }
+
 
     private void reverseRecurHelper(int i){
 
@@ -117,7 +122,7 @@ public class SLList {
         S.insert(4, 0);
         S.insert(9, 4);
         S.print();
-        S.reverse2();
+        S.reverseIter();
         S.print();
     }
 }
